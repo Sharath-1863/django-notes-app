@@ -5,9 +5,7 @@ pipeline {
 
         stage("Code") {
             steps {
-                echo "This is cloning the code"
-                git url: "https://github.com/Sharath-1863/django-notes-app.git", branch: "main"
-                echo "code cloning successful"
+                echo "Code checkout completed by Jenkins"
             }
         }
 
@@ -28,9 +26,10 @@ pipeline {
             steps {
                 echo "This is deploying the code"
 
-                withCredentials([string(credentialsId: 'django_env', variable: 'ENV_FILE')]) {
+                withCredentials([string(credentialsId: 'django_env', variable: 'DJANGO_ENV')]) {
                     sh '''
-                        printf "%s\\n" "$ENV_FILE" > .env
+                        printf "%s\\n" "$DJANGO_ENV" > .env
+                        docker compose down
                         docker compose up -d
                         rm -f .env
                     '''
