@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo "This is deploying the code"
 
-                withCredentials([string(credentialsId: 'django-env', variable: 'ENV_FILE')]) {
+                withCredentials([string(credentialsId: 'django_env', variable: 'ENV_FILE')]) {
                     sh '''
                         printf "%s\\n" "$ENV_FILE" > .env
                         docker compose up -d
