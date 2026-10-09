@@ -105,7 +105,7 @@ pipeline {
 
                 withCredentials([
                     string(
-                        credentialsId: 'django-env',
+                        credentialsId: 'django_env',
                         variable: 'DJANGO_ENV'
                     )
                 ]) {
